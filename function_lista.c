@@ -2,7 +2,7 @@
 
 int validar_caractere(char c) 
 {
-    if ("c == 'X' c == 'O'") 
+    if (c != 'X' || c != 'O') 
     {
         return 1; 
     }
