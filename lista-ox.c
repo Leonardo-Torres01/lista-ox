@@ -1,27 +1,31 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include "function_lista.c"
 
-int validar_caractere(char c) 
+int main(int argc, char *argv[]) 
 {
-    if (c == 'X' || c == 'O') 
-    {
-        return 1;
-    }
-    return 0;
-}
+    char lista[9] = {0};
 
-void preencher_argumentos(char lista[9], int argc, char *argv[]) 
-{
-    int index = 0;
-    for (int i = 1; i < argc && index < 9; i++)
+
+    if (argc > 1)
      {
-        for (int j = 0; argv[i][j] != '\0' && index < 9; j++) 
+        preencher_argumentos(lista, argc, argv);
+    } 
+    else 
+    {
+      
+        for (int i = 0; i < 9; i++) 
         {
-            char c = argv[i][j];
-            if (validar_caractere(c)) 
+            char temp;
+            printf("Digite o caractere %d da lista: ", i + 1);
+            scanf(" %c", &temp);
+
+            while (!validar_caractere(temp)) 
             {
-                lista[index] = c;
-                index++;
+                printf("caractere invalido\n");
+                printf("Digite o caractere %d da lista: ", i + 1);
+                scanf(" %c", &temp);
             }
+            lista[i] = temp;
         }
     }
-}
