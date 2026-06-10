@@ -1,41 +1,27 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include "function_lista.c"
 
-int main(int argc, char *argv[]) 
+int validar_caractere(char c) 
 {
-    char lista[9] = {0};
-
-
-    if (argc > 1)
-     {
-        preencher_por_argumentos(lista, argc, argv);
-    } 
-    else 
+    if (c == 'X' || c == 'O') 
     {
-      
-        for (int i = 0; i < 9; i++) 
-        {
-            char temp;
-            printf("Digite o caractere %d da lista: ", i + 1);
-            scanf(" %c", &temp);
+        return 1;
+    }
+    return 0;
+}
 
-            while (!validar_caractere(temp)) 
+void preencher_argumentos(char lista[9], int argc, char *argv[]) 
+{
+    int index = 0;
+    for (int i = 1; i < argc && index < 9; i++)
+     {
+        for (int j = 0; argv[i][j] != '\0' && index < 9; j++) 
+        {
+            char c = argv[i][j];
+            if (validar_caractere(c)) 
             {
-                printf("caractere invalido\n");
-                printf("Digite o caractere %d da lista: ", i + 1);
-                scanf(" %c", &temp);
+                lista[index] = c;
+                index++;
             }
-            lista[i] = temp;
         }
     }
-
-   
-    for (int i = 0; i < 9; i++) 
-    {
-        printf("Caractere %d: %c\n", i + 1, lista[i]);
-    }
-
-    printf("\nFeito por Leonardo Mattoso (https://github.com/Leonardo-Torres01)");
-    return 0;
 }
